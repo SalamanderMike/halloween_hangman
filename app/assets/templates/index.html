@@ -1,3 +1,38 @@
-<h1>Game On!</h1>
+<h1>Hangman!</h1>
+<button style="float:left;" ng-click="secretPhrase">Play!</button>
+
+<div id="letters">
+  <div class="box"  ng-repeat="letter in alpha"
+                    ng-click="showLetter(letter)" ng-hide="letter.hidden">{{letter.chr}}</div>
+</div>
+
+<div id="phrase">
+
+  <table style="margin: 0px auto;">
+    <tr>
+      <td class="secret"  ng-repeat="letter in secret">{{letter.chr}}
+        <div class="underline"></div>
+      </td>
+    </tr>
+  </table>
+</div>
 
 
+
+
+
+
+
+
+
+<div id="canvas">
+<!-- SVG Start -->
+<!-- <polyline points="400, 500 100" style="fill:black">
+
+<line style="stroke:black;" x1="320" y1="190" x2="320" y2="360">
+<circle style="stroke: ;" cx="" cy="" r=""> -->
+</div>
+
+
+
+<!-- <button name="btn1" class="numberbutton" value="1" ng-click='updateOutput(1)'>1</button> -->

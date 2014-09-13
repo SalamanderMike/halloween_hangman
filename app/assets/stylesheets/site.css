@@ -1,0 +1,75 @@
+html {
+  text-align: center;
+}
+
+
+#letters {
+  position: fixed;
+  left: 50px;
+  top: 200px;
+  height: 400px;
+  width: 400px;
+}
+
+#canvas {
+  position: fixed;
+  background: #f5f5f5;
+  right: 25px;
+  top: 100px;
+  height: 500px;
+  width: 600px;
+}
+
+#phrase {
+  position: fixed;
+  left: 25px;
+  right: 25px;
+  bottom: 10px;
+  height: 100px;
+}
+
+.box {
+  position: relative;
+  background: #a56f6f;
+  height: 60px;
+  width: 60px;
+  margin: 4px;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 3px 3px #ccc;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.box.ng-hide {
+  background: #ffebeb;
+  margin: 4px;
+  display: inline-block!important;
+  cursor: pointer;
+}
+
+.secret {
+  position: relative;
+  font-size: 4.5em;
+  width:80px;
+  cursor: pointer;
+}
+
+.underline {
+  position: absolute;
+  bottom: -7px;
+  background: #a56f6f;
+  height:10px;
+  width:80px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
