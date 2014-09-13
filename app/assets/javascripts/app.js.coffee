@@ -17,38 +17,29 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
 ]
 
 GameApp.controller "GameCtrl", ["$scope", ($scope) ->
-  $scope.alpha = [
-    {chr: 'A', hidden: false},{chr: 'B', hidden: false},
-    {chr: 'C', hidden: false},{chr: 'D', hidden: false},
-    {chr: 'E', hidden: false},{chr: 'F', hidden: false},
-    {chr: 'G', hidden: false},{chr: 'H', hidden: false},
-    {chr: 'I', hidden: false},{chr: 'J', hidden: false},
-    {chr: 'K', hidden: false},{chr: 'L', hidden: false},
-    {chr: 'M', hidden: false},{chr: 'N', hidden: false},
-    {chr: 'O', hidden: false},{chr: 'P', hidden: false},
-    {chr: 'Q', hidden: false},{chr: 'R', hidden: false},
-    {chr: 'S', hidden: false},{chr: 'T', hidden: false},
-    {chr: 'U', hidden: false},{chr: 'V', hidden: false},
-    {chr: 'W', hidden: false},{chr: 'X', hidden: false},
-    {chr: 'Y', hidden: false},{chr: 'Z', hidden: false}]
+  $scope.secretWord = "PUMPKIN".split('') # test word
+  $scope.secretDisplay = {}
+  $scope.alpha = {}
 
-  $scope.secret = [ {chr: 'p', hidden: false},
-                    {chr: 'u', hidden: false},
-                    {chr: 'm', hidden: false},
-                    {chr: 'p', hidden: false},
-                    {chr: 'k', hidden: false},
-                    {chr: 'i', hidden: false},
-                    {chr: 'n', hidden: false}]
+# Generate alphabet
+  for i in [0..25] by 1
+    $scope.abc = String.fromCharCode('A'.charCodeAt() + i)
+    $scope.alpha[$scope.abc] = {secret: false, hidden: false}
 
-  $scope.showLetter = (letter) ->
-    letter.hidden = true
+# Generate secret word display
+  for i in $scope.secretWord
+    $scope.secretDisplay[i] = {secret: true, hidden: true}
+
+# Show/Hide letters in word
+  $scope.showLetter = (letter, show) ->
+    if letter in $scope.secretWord
+      show.hidden = true
+      $scope.secretDisplay[letter].hidden = false
 
 
 
 
-# if letter in secret
-#   console.log("test")
-#   hidden = false
+
 
 
 

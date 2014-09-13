@@ -54,9 +54,17 @@ html {
   cursor: pointer;
 }
 
+.secret.ng-hide {
+  color: transparent;
+  font-size: 3em;
+  width:80px;
+  display: inline-block!important;
+  cursor: pointer;
+}
+
 .underline {
-  position: absolute;
-  bottom: -7px;
+  position: fixed;
+  bottom: 20px;
   background: #a56f6f;
   height:10px;
   width:80px;
