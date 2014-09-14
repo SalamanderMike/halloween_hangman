@@ -1,5 +1,5 @@
 # Define App               name          dependencies
-GameApp = angular.module("GameApp", ["ngRoute", "templates"])
+GameApp = angular.module("GameApp", ["ngRoute", "templates", "ngAnimate"])
 
 # Setup the angular router [inject dependencied]
 GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
@@ -18,23 +18,24 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
 
 GameApp.controller "GameCtrl", ["$scope", ($scope) ->
   $scope.secretWord = "PUMPKIN".split('') # test word
-  $scope.secretDisplay = {}
-  $scope.alpha = {}
+  $scope.secretDisplay = []
+  $scope.alpha = []
 
 # Generate alphabet
   for i in [0..25] by 1
     $scope.abc = String.fromCharCode('A'.charCodeAt() + i)
-    $scope.alpha[$scope.abc] = {secret: false, hidden: false}
+    $scope.alpha[i] = {chr: $scope.abc, secret: false, hidden: false}
 
 # Generate secret word display
-  for i in $scope.secretWord
-    $scope.secretDisplay[i] = {secret: true, hidden: true}
+  for character in $scope.secretWord
+    for object in $scope.alpha
+      if character == object.chr
+        $scope.secretDisplay.push(object)
 
 # Show/Hide letters in word
-  $scope.showLetter = (letter, show) ->
-    if letter in $scope.secretWord
-      show.hidden = true
-      $scope.secretDisplay[letter].hidden = false
+  $scope.showLetter = (letter) ->
+    if letter.chr in $scope.secretWord
+      letter.hidden = true
 
 
 

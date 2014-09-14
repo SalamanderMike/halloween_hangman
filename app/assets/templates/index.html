@@ -2,15 +2,15 @@
 <button style="float:left;" ng-click="secretPhrase">Play!</button>
 
 <div id="letters">
-  <div class="box"  ng-repeat="(letter, show) in alpha"
-                    ng-click="showLetter(letter, show)" ng-hide="show.hidden">{{letter}}</div>
+  <div class="box"  ng-repeat="letter in alpha"
+                    ng-click="showLetter(letter)" ng-hide="letter.hidden">{{letter.chr}}</div>
 </div>
 
 <div id="phrase">
 
   <table style="margin: 0px auto;">
     <tr>
-      <td class="secret"  ng-repeat="(letter, show) in secretDisplay" ng-hide="show.hidden">{{letter}}
+      <td class="secret"  ng-repeat="letter in secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
         <div class="underline"></div>
       </td>
     </tr>

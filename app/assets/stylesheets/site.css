@@ -36,8 +36,10 @@ html {
   margin: 4px;
   -webkit-border-radius: 10px;
   -webkit-box-shadow: 2px 2px 3px 3px #ccc;
+  -webkit-transition: 0.15s linear all;
   display: inline-block;
   cursor: pointer;
+  opacity: 1;
 }
 
 .box.ng-hide {
@@ -45,20 +47,20 @@ html {
   margin: 4px;
   display: inline-block!important;
   cursor: pointer;
+  opacity: 0;
 }
 
 .secret {
   position: relative;
+  color: black;
   font-size: 4.5em;
-  width:80px;
+  width: 80px;
   cursor: pointer;
 }
 
 .secret.ng-hide {
-  color: transparent;
-  font-size: 3em;
-  width:80px;
   display: inline-block!important;
+  color: transparent;
   cursor: pointer;
 }
 
