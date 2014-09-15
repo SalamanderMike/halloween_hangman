@@ -19,20 +19,7 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
 GameApp.controller "GameCtrl", ["$scope", "$rootScope", ($scope, $rootScope, $dialogs) ->
 
 
-# # MODAL
-#   $scope.secretWindow = ->
-#     dlg = null
-#     dlg = $dialogs.create("/dialogs/whatsyoursecret.html", "whatsYourSecretCtrl", {},
-#       key: false
-#       back: "static"
-#     )
-#     dlg.result.then ((secretPhrase) ->
-#       $scope.secretPhrase = secretPhrase
-#       return
-#     ), ->
-#       $scope.secretPhrase = "You decided not to enter a secret, that makes me sad."
-#       return
-#     return
+
 
 # Reset Board
   $scope.resetAll = ->
@@ -59,6 +46,9 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", ($scope, $rootScope, $di
     $scope.secretWord = $scope.testWord.toUpperCase().split('')
     $scope.win = $scope.secretWord.length
 
+    console.log $scope.secretDisplay
+    # console.log $scope.secretDisplay
+
     for character in $scope.secretWord
       for object in $scope.alpha
         if character == object.chr
@@ -69,9 +59,10 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", ($scope, $rootScope, $di
   $scope.showLetter = (letter) ->
     if letter.chr in $scope.secretWord
       letter.hidden = true
-      $scope.secretWord -= 1
+      $scope.win -= 1
+      console.log $scope.win
       # todo: must account for multiple same letters
-      if $scope.secretWord == 0
+      if $scope.win == 1
         $scope.resetAll()
     else
       $scope.lose += 1
@@ -80,6 +71,22 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", ($scope, $rootScope, $di
         console.log "ACK!!! You be hunged!"
         $scope.resetAll()
 
+
+
+# # MODAL
+#   $scope.secretWindow = ->
+#     dlg = null
+#     dlg = $dialogs.create("/dialogs/whatsyoursecret.html", "whatsYourSecretCtrl", {},
+#       key: false
+#       back: "static"
+#     )
+#     dlg.result.then ((secretPhrase) ->
+#       $scope.secretPhrase = secretPhrase
+#       return
+#     ), ->
+#       $scope.secretPhrase = "You decided not to enter a secret, that makes me sad."
+#       return
+#     return
 ]
 
 
