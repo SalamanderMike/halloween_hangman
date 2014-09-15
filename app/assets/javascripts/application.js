@@ -12,10 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require angular-1.2.24/angular.min
-//= require angular-1.2.24/angular-route.min
-//= require angular-1.2.24/angular-animate.min
+//= require angular-1.2.24/angular
+//= require angular-1.2.24/angular-route
+//= require angular-1.2.24/angular-animate
+//= require angular-1.2.24/angular-sanitize.min
 //= require angular-rails-templates
+//= require angular-translate.min
+//= require dialogs
+//= require ui-bootstrap-tpls-0.6.0.min
 //= require_tree .
 //= require_tree ../templates
 

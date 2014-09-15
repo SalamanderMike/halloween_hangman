@@ -1,7 +1,23 @@
 html {
   text-align: center;
+  background: url(halloween.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
+.headding {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#020202), color-stop(100%,#48595e));
+  font-family: 'Aladin', cursive;
+  font-size: 4em;
+  color: green;
+}
+
+div .word-group {
+  display: inline-block;
+  float: left;
+}
 
 #letters {
   position: fixed;
@@ -13,10 +29,10 @@ html {
 
 #canvas {
   position: fixed;
-  background: #f5f5f5;
+  background: rgba(0,0,0,.5);
   right: 25px;
   top: 100px;
-  height: 500px;
+  height: 550px;
   width: 600px;
 }
 
@@ -30,12 +46,14 @@ html {
 
 .box {
   position: relative;
-  background: #a56f6f;
-  height: 60px;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));  height: 60px;
   width: 60px;
+  font-family: 'Slabo 13px', serif;
+  font-size: 3em;
+  color: #692d12;
   margin: 4px;
   -webkit-border-radius: 10px;
-  -webkit-box-shadow: 2px 2px 3px 3px #ccc;
+  -webkit-box-shadow: 2px 2px 3px 3px #2e150a;
   -webkit-transition: 0.15s linear all;
   display: inline-block;
   cursor: pointer;
@@ -52,7 +70,8 @@ html {
 
 .secret {
   position: relative;
-  color: black;
+  color: #ffa71a;
+  font-family: 'Coustard', serif;
   font-size: 4.5em;
   width: 80px;
   cursor: pointer;
@@ -67,13 +86,23 @@ html {
 .underline {
   position: fixed;
   bottom: 20px;
-  background: #a56f6f;
+  background: #ffe605;
   height:10px;
-  width:80px;
+  width:75px;
   cursor: pointer;
 }
 
+.modal {
+  display: block;
+}
 
+/* Custom dialog/modal headers */
+.modal-header { background-color: #ffbd2e; }
+.modal-footer { background-color: #c7ffd2; }
+.modal-header span, .modal-header h4 { color: #ffffff; }
+
+/* Ease Display */
+.pad { padding: 25px; }
 
 
 

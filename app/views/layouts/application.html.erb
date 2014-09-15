@@ -2,11 +2,16 @@
 <html>
 <head>
   <title>Halloween Hangman!</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href='http://fonts.googleapis.com/css?family=Aladin' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Slabo+13px' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Coustard:900' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="GameApp">
+<body  ng-app="GameApp">
+<!-- <body ng-controller="GameCtrl" class="pad"> -->
   <div ng-view>
   </div>
 </body>

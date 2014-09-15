@@ -1,5 +1,17 @@
-<h1>Hangman!</h1>
-<button style="float:left;" ng-click="secretPhrase">Play!</button>
+<div class="headding">
+  <p>Halloween Hangman!</p>
+</div>
+
+<div class="word" ng-show ="inputVisible">
+  <span class="word-group">
+    <input autofocus type="text" class="form-control" placeholder="Secret Word" ng-model ="testWord">
+    <button class="btn btn-danger" ng-click="makeSecretWord(testWord)">Play Your Secret Word!</button>
+  </span>
+</div>
+
+
+
+
 
 <div id="letters">
   <div class="box"  ng-repeat="letter in alpha"
@@ -10,14 +22,13 @@
 
   <table style="margin: 0px auto;">
     <tr>
-      <td class="secret"  ng-repeat="letter in secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
+      <td class="secret" ng-repeat="letter in secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
         <div class="underline"></div>
       </td>
     </tr>
   </table>
 
 </div>
-
 
 
 
