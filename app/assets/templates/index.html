@@ -10,16 +10,12 @@
 </div>
 
 
-
-
-
 <div id="letters">
   <div class="box"  ng-repeat="letter in alpha"
                     ng-click="showLetter(letter)" ng-hide="letter.hidden">{{letter.chr}}</div>
 </div>
 
 <div id="phrase">
-
   <table style="margin: 0px auto;">
     <tr>
       <td class="secret" ng-repeat="letter in secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
@@ -27,24 +23,15 @@
       </td>
     </tr>
   </table>
-
 </div>
 
+  <svg id="canvas">
+    <line id="torso" x1="200" y1="200" x2="200" y2="300" style="stroke:cyan;stroke-width:10"></line>
+    <line id="leftArm" x1="200" y1="220" x2="100" y2="100" style="stroke:cyan;stroke-width:10"></line>
+    <line id="rightArm" x1="200" y1="220" x2="300" y2="220" style="stroke:cyan;stroke-width:10"></line>
+    <line id="leftLeg" x1="200" y1="300" x2="100" y2="400" style="stroke:cyan;stroke-width:10"></line>
+    <line id="rightLeg" x1="200" y1="300" x2="300" y2="400" style="stroke:cyan;stroke-width:10"></line>
+    <circle cx="200" cy="150" r="50" style="stroke:cyan;stroke-width:10"></circle>
+  </svg>
 
 
-
-
-
-
-
-<div id="canvas">
-<!-- SVG Start -->
-<!-- <polyline points="400, 500 100" style="fill:black">
-
-<line style="stroke:black;" x1="320" y1="190" x2="320" y2="360">
-<circle style="stroke: ;" cx="" cy="" r=""> -->
-</div>
-
-
-
-<!-- <button name="btn1" class="numberbutton" value="1" ng-click='updateOutput(1)'>1</button> -->
