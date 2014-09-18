@@ -14,9 +14,11 @@ html {
   color: green;
 }
 
-div .word-group {
-  display: inline-block;
-  float: left;
+#playButton {
+  position: fixed;
+  top: 120px;
+  left: 195px;
+  font-size: 3em;
 }
 
 #letters {

@@ -18,20 +18,7 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
 
 GameApp.controller "GameCtrl", ["$scope", "$rootScope", "dialogs", ($scope, $rootScope, $dialogs) ->
 
-# MODAL
-  $scope.secretWindow = ->
-    dlg = null
-    dlg = $dialogs.create("/dialogs/whatsyoursecret.html", "whatsYourSecretCtrl", {},
-      key: false
-      back: "static"
-    )
-    dlg.result.then ((secretPhrase) ->
-      $scope.secretPhrase = secretPhrase
-      return
-    ), ->
-      $scope.secretPhrase = "You decided not to enter a secret, that makes me sad."
-      return
-    return
+
 
 
 # Reset Board
@@ -52,12 +39,13 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", "dialogs", ($scope, $roo
 
   $scope.resetAll()
 
-  $scope.makeSecretWord = (secretInput) ->
+  $scope.makeSecretWord = ->
     $scope.resetAll()
     $scope.generateAlpha()
     $scope.inputVisible = false
-    $scope.secretWord = $scope.secretInput.toUpperCase().split('')
+    $scope.secretWord = $scope.secretPhrase.toUpperCase().split('')
     $scope.win = $scope.secretWord.length
+    $scope.secretPhrase = ""
 
     console.log $scope.secretDisplay
     # console.log $scope.secretDisplay
@@ -85,7 +73,22 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", "dialogs", ($scope, $roo
         $scope.resetAll()
 
 
-
+# MODAL
+  $scope.secretWindow = ->
+    dlg = null
+    dlg = $dialogs.create("/dialogs/whatsyoursecret.html", "whatsYourSecretCtrl", {},
+      key: false
+      back: "static"
+    )
+    dlg.result.then ((secretPhrase) ->
+      $scope.secretPhrase = secretPhrase
+      $scope.makeSecretWord()
+      return
+    ), ->
+      $scope.secretPhrase = "CANCELLED INPUT WINDOW"
+      console.log $scope.secretPhrase
+      return
+    return
 
 ]
 

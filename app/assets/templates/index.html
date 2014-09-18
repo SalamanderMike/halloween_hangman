@@ -2,12 +2,9 @@
   <p>Halloween Hangman!</p>
 </div>
 
-<div class="word" ng-show ="inputVisible">
-  <span class="word-group">
-    <input autofocus type="text" class="form-control" placeholder="Secret Word" ng-model ="secretInput">
-    <button class="btn btn-danger" ng-click="secretWindow()">Play Your Secret Word!</button>
-  </span>
-</div> <!-- makeSecretWord(secretInput) -->
+<div ng-show ="inputVisible">
+    <button id="playButton" class="btn btn-warning" ng-click="secretWindow()">Play!</button>
+</div>
 
 
 <div id="letters">
