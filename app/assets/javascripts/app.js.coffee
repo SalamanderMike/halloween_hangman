@@ -1,5 +1,5 @@
 # Define App               name          dependencies
-GameApp = angular.module("GameApp", ["ngRoute", "ngAnimate", "ui.bootstrap", "dialogs.main"])
+GameApp = angular.module("GameApp", ["ngRoute", "ngAnimate", "ui.bootstrap"])
 
 # Setup the angular router [inject dependencied]
 GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
@@ -16,10 +16,7 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
   $locationProvider.html5Mode(true)
 ]
 
-GameApp.controller "GameCtrl", ["$scope", "$rootScope", "dialogs", ($scope, $rootScope, $dialogs) ->
-
-
-
+GameApp.controller "GameCtrl", ["$scope", "$modal", "$log", ($scope, $modal, $log) ->
 
 # Reset Board
   $scope.resetAll = ->
@@ -74,50 +71,38 @@ GameApp.controller "GameCtrl", ["$scope", "$rootScope", "dialogs", ($scope, $roo
 
 
 # MODAL
-  $scope.secretWindow = ->
-    dlg = null
-    dlg = $dialogs.create("/dialogs/whatsyoursecret.html", "whatsYourSecretCtrl", {},
-      key: false
-      back: "static"
+  $scope.secretWindow = (size) ->
+    modalInstance = $modal.open(
+      templateUrl: "myModalContent.html"
+      controller: modalControls
+      size: size
     )
-    dlg.result.then ((secretPhrase) ->
+    modalInstance.result.then (secretPhrase) ->
       $scope.secretPhrase = secretPhrase
-      $scope.makeSecretWord()
-      return
-    ), ->
-      $scope.secretPhrase = "CANCELLED INPUT WINDOW"
-      console.log $scope.secretPhrase
-      return
-    return
-
+      if $scope.secretPhrase.length > 1
+        $scope.makeSecretWord($scope.secretPhrase)
+    , ->
+      $log.info "Modal dismissed"
 ]
 
 
 # MODAL
-GameApp.controller "whatsYourSecretCtrl", ["$scope", "$modalInstance", ($scope, $modalInstance, data) ->
+modalControls = ($scope, $modalInstance) ->
   $scope.words = secretPhrase: ""
+
   $scope.cancel = ->
     $modalInstance.dismiss "canceled"
-    return
 
   # end cancel
-  $scope.save = ->
+  $scope.play = ->
     $modalInstance.close $scope.words.secretPhrase
-    return
 
   # end save
   $scope.hitEnter = (evt) ->
-    $scope.save()  if angular.equals(evt.keyCode, 13) and not (angular.equals($scope.secretPhrase, null) or angular.equals($scope.secretPhrase, ""))
-    return
-  return
-]
+    $scope.play()  if angular.equals(evt.keyCode, 13) and not (angular.equals($scope.secretPhrase, null) or angular.equals($scope.secretPhrase, ""))
 
-# MODAL
-GameApp.run [
-  "$templateCache"
-  ($templateCache) ->
-    $templateCache.put "/dialogs/whatsyoursecret.html", "<div class=\"modal-header\"><h4 class=\"modal-title\"><span class=\"glyphicon glyphicon-star\"></span> Halloween Hangman!</h4></div><div class=\"modal-body\"><ng-form name=\"inputDialog\" novalidate role=\"form\"><div class=\"form-group input-group-lg\" ng-class=\"{true: 'has-error'}[inputDialog.inputSecret.$dirty && inputDialog.inputSecret.$invalid]\"><label class=\"control-label\" for=\"inputSecret\">Type Secret Word:</label><input type=\"text\" class=\"form-control\" name=\"inputSecret\" id=\"inputSecret\" ng-model=\"words.secretPhrase\" ng-keyup=\"hitEnter($event)\" required autofocus><span class=\"help-block\">Just enter one word until I get smarter</span></div></ng-form></div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button><button type=\"button\" class=\"btn btn-primary\" ng-click=\"save()\" ng-disabled=\"(inputDialog.$dirty && inputDialog.$invalid) || inputDialog.$pristine\">Save</button></div>"
-]
+
+GameApp.controller "whatsYourSecretCtrl", modalControls
 
 # # UNUSED
 # GameApp.controller "WinLoseCtrl", ["$scope", ($scope) ->
@@ -127,3 +112,13 @@ GameApp.run [
 GameApp.config ["$httpProvider", ($httpProvider)->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
+
+# AUTOFOCUS FOR MODAL
+# ALSO altered ui-bootstrap-tpls.js:1856 to be friendlier to autofocus
+GameApp.directive "autofocus", ($timeout) ->
+  link: (scope, element) ->
+    $timeout ->
+      element[0].focus()
+
+
+

@@ -22,13 +22,31 @@
   </table>
 </div>
 
-  <svg id="canvas">
-    <line id="torso" x1="200" y1="200" x2="200" y2="300" style="stroke:cyan;stroke-width:10"></line>
-    <line id="leftArm" x1="200" y1="220" x2="100" y2="100" style="stroke:cyan;stroke-width:10"></line>
-    <line id="rightArm" x1="200" y1="220" x2="300" y2="220" style="stroke:cyan;stroke-width:10"></line>
-    <line id="leftLeg" x1="200" y1="300" x2="100" y2="400" style="stroke:cyan;stroke-width:10"></line>
-    <line id="rightLeg" x1="200" y1="300" x2="300" y2="400" style="stroke:cyan;stroke-width:10"></line>
-    <circle cx="200" cy="150" r="50" style="stroke:cyan;stroke-width:10"></circle>
-  </svg>
+<svg id="canvas">
+  <line id="torso" x1="200" y1="200" x2="200" y2="300" style="stroke:cyan;stroke-width:10"></line>
+  <line id="leftArm" x1="200" y1="220" x2="100" y2="100" style="stroke:cyan;stroke-width:10"></line>
+  <line id="rightArm" x1="200" y1="220" x2="300" y2="220" style="stroke:cyan;stroke-width:10"></line>
+  <line id="leftLeg" x1="200" y1="300" x2="100" y2="400" style="stroke:cyan;stroke-width:10"></line>
+  <line id="rightLeg" x1="200" y1="300" x2="300" y2="400" style="stroke:cyan;stroke-width:10"></line>
+  <circle cx="200" cy="150" r="50" style="stroke:cyan;stroke-width:10"></circle>
+</svg>
+
+
+<!-- Holds onto HTLM to be called by Modal -->
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title">I am a modal!</h3>
+  </div>
+
+  <div class="modal-body">
+  <input type="text" class="form-control" name="inputWindow" id="inputWindow" ng-model="words.secretPhrase" ng-keyup="hitEnter($event)" autofocus required>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="play()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
 
 
