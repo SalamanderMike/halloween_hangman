@@ -1,11 +1,11 @@
 # Define App               name          dependencies
-GameApp = angular.module("GameApp", ["ngRoute", "templates", "ngAnimate", "ui.bootstrap", "dialogs.main"])
+GameApp = angular.module("GameApp", ["ngRoute", "ngAnimate", "ui.bootstrap", "dialogs.main"])
 
 # Setup the angular router [inject dependencied]
 GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
   $routeProvider
     .when "/",
-      templateUrl: "index.html",
+      templateUrl: "/game_templates",
       controller: "GameCtrl"
   # .when "/dialogs/",
   #   templateUrl: "whatsyoursecret.html",
