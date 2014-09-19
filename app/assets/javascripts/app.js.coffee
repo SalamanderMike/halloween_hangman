@@ -1,6 +1,7 @@
-# Define App               name          dependencies
+# MAIN
 GameApp = angular.module("GameApp", ["ngRoute", "ngAnimate", "ui.bootstrap"])
 
+# ROUTER
 # Setup the angular router [inject dependencied]
 GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
   $routeProvider
@@ -16,6 +17,7 @@ GameApp.config ["$routeProvider", "$locationProvider", ($routeProvider, $locatio
   $locationProvider.html5Mode(true)
 ]
 
+# CONTROLLERS
 GameApp.controller "GameCtrl", ["$scope", "$modal", "$log", ($scope, $modal, $log) ->
 
 # Reset Board
