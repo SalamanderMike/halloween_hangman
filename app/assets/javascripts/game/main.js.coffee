@@ -1,4 +1,5 @@
 angular.module("GameApp", [
   "GameRouter",
-  "GameControllers"
+  "GameControllers",
+  "GameFactories"
   ])

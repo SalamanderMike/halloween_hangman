@@ -1,7 +1,7 @@
 GameControllers = angular.module("GameControllers", ["ngResource", "ngAnimate", "ui.bootstrap"])
 
 class GameCtrl
-  constructor: (@scope, @modal, @log) ->
+  constructor: (@scope, @modal, @log, @ModalControls) ->
     console.log "HELLO!"
     @inputVisible = true
     @secretWord = ""
@@ -43,56 +43,56 @@ class GameCtrl
 
 
   # Show/Hide letters in word
+      # todo: must keep spaces from drawing
   showLetter: (letter) =>
     if letter.chr in @secretWord
       letter.hidden = true
       @win -= 1
       console.log @win
-      # todo: must account for multiple same letters
       if @win == 1
         @resetAll()
     else
       @lose += 1
-
       if @lose == 6
         console.log "ACK!!! You be hunged!"
         @resetAll()
 
 
-#   # MODAL
-#   $scope.secretWindow = (size) ->
-#     modalInstance = $modal.open(
-#       templateUrl: "myModalContent.html"
-#       controller: modalControls
-#       size: size
-#     )
-#     modalInstance.result.then (secretPhrase) ->
-#       $scope.secretPhrase = secretPhrase
-#       if $scope.secretPhrase.length > 1
-#         $scope.makeSecretWord($scope.secretPhrase)
-#     , ->
-#       $log.info "Modal dismissed"
+  # MODAL
+  secretWindow: (size) =>
+    modalInstance = @modal.open(
+      templateUrl: "myModalContent.html"
+      controller: @ModalControls
+      size: size
+    )
+    modalInstance.result.then (secretPhrase) ->
+      @secretPhrase = secretPhrase
+      if @secretPhrase.length > 1
+        @makeSecretWord(secretPhrase)
+    , ->
+      console.log "Modal dismissed"
 
 
-# # MODAL CONTROLS
+# MODAL CONTROLS
 # class ModalControls
-#   constructor: (@scope, @modalInstance) ->
-#     $scope.words = secretPhrase: ""
+#   constructor: (@scope, @modalInstance, @GameCtrl) ->
+#     @words = @GameCtrl.secretPhrase
+#     console.log @words
 
-#   $scope.cancel = ->
-#     $modalInstance.dismiss "canceled"
+#   cancel: ->
+#     @modalInstance.dismiss "canceled"
 
-#   # end cancel
-#   $scope.play = ->
-#     $modalInstance.close $scope.words.secretPhrase
+  # end cancel
+  # play: =>
+  #   @modalInstance.close @words.secretPhrase
 
-#   # end save
-#   $scope.hitEnter = (evt) ->
-#     $scope.play()  if angular.equals(evt.keyCode, 13) and not (angular.equals($scope.secretPhrase, null) or angular.equals($scope.secretPhrase, ""))
+  # # end save
+  # hitEnter: (evt) ->
+  #   @play()  if angular.equals(evt.keyCode, 13) and not (angular.equals(@secretPhrase, null) or angular.equals(@secretPhrase, ""))
 
 
 
-GameControllers.controller("GameCtrl", ["$scope", "$modal", "$log", GameCtrl])
+GameControllers.controller("GameCtrl", ["$scope", "$modal", "$log", "ModalControls", GameCtrl])
 
 # GameControllers.controller("whatsYourSecretCtrl", [ModalControls])
 

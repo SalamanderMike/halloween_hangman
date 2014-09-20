@@ -3,7 +3,7 @@
 </div>
 
 <div ng-show ="true">
-    <button id="playButton" class="btn btn-warning" ng-click="game.makeSecretWord()">Play!</button>
+    <button id="playButton" class="btn btn-warning" ng-click="game.secretWindow()">Play!</button>
 </div>
 
 
@@ -39,12 +39,12 @@
   </div>
 
   <div class="modal-body">
-  <input type="text" class="form-control" name="inputWindow" id="inputWindow" ng-model="words.secretPhrase" ng-keyup="hitEnter($event)" autofocus required>
+  <input type="text" class="form-control" name="inputWindow" id="inputWindow" ng-model="words.secretPhrase" ng-keyup="game.hitEnter($event)" autofocus required>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="play()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="game.play()">OK</button>
+    <button class="btn btn-warning" ng-click="game.cancel()">Cancel</button>
   </div>
 </script>
 

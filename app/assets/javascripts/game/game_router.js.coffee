@@ -14,9 +14,9 @@ GameRouter = angular.module("GameRouter", [
 GameRouter.config(["$routeProvider", "$locationProvider", Router])
 
 # Define Config for CSRF token (security)
-GameRouter.config ["$httpProvider", ($httpProvider)->
-  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-]
+# GameRouter.config ["$httpProvider", ($httpProvider)->
+#   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+# ]
 
 
 
