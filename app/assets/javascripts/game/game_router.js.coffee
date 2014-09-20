@@ -3,7 +3,7 @@ class Router
     @routeProvider.
       when "/",
         templateUrl: "/game_templates",
-        controller: "GameCtrl"
+        controller: "GameCtrl as game"
 
     @locationProvider.html5Mode(true)
 
@@ -13,10 +13,8 @@ GameRouter = angular.module("GameRouter", [
 
 GameRouter.config(["$routeProvider", "$locationProvider", Router])
 
-
-
 # Define Config for CSRF token (security)
-GameApp.config ["$httpProvider", ($httpProvider)->
+GameRouter.config ["$httpProvider", ($httpProvider)->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
 
