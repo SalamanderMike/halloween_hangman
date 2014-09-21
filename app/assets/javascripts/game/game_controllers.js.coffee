@@ -30,6 +30,7 @@ class GameCtrl
 
   # Display Secret Word Blanks
   makeSecretWord: =>
+    console.log "TESTING HERE"
     @resetAll()
     @inputVisible = false
     @secretWord = @secretPhrase.toUpperCase().split('')
@@ -62,10 +63,10 @@ class GameCtrl
   secretWindow: (size) =>
     modalInstance = @modal.open(
       templateUrl: "myModalContent.html"
-      controller: @ModalControls
+      controller: "secretModal as modal"
       size: size
     )
-    modalInstance.result.then (secretPhrase) ->
+    modalInstance.result.then (secretPhrase) =>
       @secretPhrase = secretPhrase
       if @secretPhrase.length > 1
         @makeSecretWord(secretPhrase)
@@ -73,28 +74,27 @@ class GameCtrl
       console.log "Modal dismissed"
 
 
+
 # MODAL CONTROLS
-# class ModalControls
-#   constructor: (@scope, @modalInstance, @GameCtrl) ->
-#     @words = @GameCtrl.secretPhrase
-#     console.log @words
+class ModalControls
+  constructor: (@scope, @modalInstance) ->
+    @secretPhrase = ""
+    console.log "INSIDE MODAL CONTROL"
 
-#   cancel: ->
-#     @modalInstance.dismiss "canceled"
+  cancel: ->
+    console.log "CANCEL"
+    @modalInstance.dismiss "canceled"
 
-  # end cancel
-  # play: =>
-  #   @modalInstance.close @words.secretPhrase
+  play: =>
+    @modalInstance.close @secretPhrase
 
-  # # end save
-  # hitEnter: (evt) ->
-  #   @play()  if angular.equals(evt.keyCode, 13) and not (angular.equals(@secretPhrase, null) or angular.equals(@secretPhrase, ""))
-
+  hitEnter: (evt) =>
+    @play()  if angular.equals(evt.keyCode, 13) and not (angular.equals(@secretPhrase, null) or angular.equals(@secretPhrase, ""))
 
 
-GameControllers.controller("GameCtrl", ["$scope", "$modal", "$log", "ModalControls", GameCtrl])
 
-# GameControllers.controller("whatsYourSecretCtrl", [ModalControls])
+GameControllers.controller("GameCtrl", ["$scope", "$modal", "$log", GameCtrl])
+GameControllers.controller("secretModal", ["$scope", "$modalInstance", ModalControls])
 
 
 # # AUTOFOCUS FOR MODAL

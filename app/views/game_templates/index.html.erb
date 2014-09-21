@@ -39,12 +39,12 @@
   </div>
 
   <div class="modal-body">
-  <input type="text" class="form-control" name="inputWindow" id="inputWindow" ng-model="words.secretPhrase" ng-keyup="game.hitEnter($event)" autofocus required>
+  <input type="text" class="form-control" name="inputWindow" id="inputWindow" ng-model="modal.secretPhrase" ng-keyup="modal.hitEnter($event)" autofocus required>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="game.play()">OK</button>
-    <button class="btn btn-warning" ng-click="game.cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="modal.play()">OK</button>
+    <button class="btn btn-warning" ng-click="modal.cancel()">Cancel</button>
   </div>
 </script>
 
