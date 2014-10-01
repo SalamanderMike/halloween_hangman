@@ -15,5 +15,8 @@
 /log/*.log
 /tmp
 
+# Bower node_modules
+node_modules
+
 # Ignore asset pipeline for git, but not for Heroku
 # vendor/assets/components
