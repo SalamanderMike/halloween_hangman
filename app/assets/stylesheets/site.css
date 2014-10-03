@@ -1,17 +1,30 @@
 html {
   text-align: center;
-  background: url(tester.jpg) no-repeat center center fixed;
-/*  -webkit-background-size: cover;
+  background: url(autumn_backdrop.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;*/
+  -o-background-size: cover;
   background-size: cover;
 }
 
 .headding {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#020202), color-stop(100%,#48595e));
+  position: absolute;
+  width: 100%;
+  top: -15px;
+  text-shadow: 4px 4px 10px rgba(255, 184, 0, 1);
   font-family: 'Aladin', cursive;
-  font-size: 4em;
+  font-size: 7em;
   color: green;
+}
+
+.construction {
+  position: absolute;
+  width: 100%;
+  bottom: 100px;
+  text-shadow: 4px 4px 10px rgba(255, 184, 0, 1);
+  font-family: 'Aladin', cursive;
+  color: white;
+  font-size: 4em;
 }
 
 #playButton {
