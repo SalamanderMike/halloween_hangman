@@ -52,6 +52,7 @@ html {
   font-family: 'Aladin', cursive;
   color: white;
   font-size: 3em;
+  z-index: 1;
 }
 
 /*FADE ANIMATION*******************************************/
@@ -59,21 +60,23 @@ html {
 }
 
 .visible.ng-hide-add, .visible.ng-hide-remove {
-  -webkit-transition:all linear 0.5s;
-  -moz-transition:all linear 0.5s;
-  -o-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  -webkit-transition:all ease-in 0.5s;
+  -moz-transition:all ease-in 0.5s;
+  -o-transition:all ease-in 0.5s;
+  transition:all ease-in 0.5s;
   display:block!important;
 }
 
 .visible.ng-hide-add.ng-hide-add-active,
 .visible.ng-hide-remove {
-  opacity:0;
+  opacity: 0;
+  -webkit-transition: opacity 1s;
 }
 
 .visible.ng-hide-add,
 .visible.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
+  opacity: 1;
+  -webkit-transition: opacity 0s;
 }
 
 /*SCREEN FLASH****************/
@@ -86,21 +89,23 @@ html {
 }
 
 .wrongLetter.ng-hide-add, .wrongLetter.ng-hide-remove {
-  -webkit-transition:all linear 0.15s;
-  -moz-transition:all linear 0.15s;
-  -o-transition:all linear 0.15s;
-  transition:all linear 0.15s;
+  -webkit-transition:all ease-in 0.15s;
+  -moz-transition:all ease-in 0.15s;
+  -o-transition:all ease-in 0.15s;
+  transition:all ease-in 0.15s;
   display:block!important;
 }
 
 .wrongLetter.ng-hide-add.ng-hide-add-active,
 .wrongLetter.ng-hide-remove {
   opacity:0;
+  -webkit-transition: opacity .1s;
 }
 
 .wrongLetter.ng-hide-add,
 .wrongLetter.ng-hide-remove.ng-hide-remove-active {
   opacity:1;
+  -webkit-transition: opacity 3s;
 }
 
 
@@ -110,7 +115,7 @@ html {
 #ghost {
   position: fixed;
   right: 25px;
-  top: 100px;
+  top: 0px;
   height: 550px;
   width: 500px;
 }
@@ -119,7 +124,6 @@ html {
   position: relative;
   width: 100%;
   height: 100%;
-
 }
 
 #one {
@@ -129,7 +133,6 @@ html {
   background: url(one.png);
   -webkit-background-size: cover;
 }
-
 #two {
   position: absolute;
   width: 100%;
@@ -137,7 +140,6 @@ html {
   background: url(two.png);
   -webkit-background-size: cover;
 }
-
 #three {
   position: absolute;
   width: 100%;
@@ -145,7 +147,6 @@ html {
   background: url(three.png);
   -webkit-background-size: cover;
 }
-
 #four {
   position: absolute;
   width: 100%;
@@ -153,7 +154,6 @@ html {
   background: url(four.png);
   -webkit-background-size: cover;
 }
-
 #five {
   position: absolute;
   width: 100%;
@@ -161,7 +161,6 @@ html {
   background: url(five.png);
   -webkit-background-size: cover;
 }
-
 #six {
   position: absolute;
   width: 100%;
@@ -176,7 +175,7 @@ html {
 #letters {
   position: fixed;
   left: 50px;
-  top: 200px;
+  top: 100px;
   height: 400px;
   width: 400px;
 }
