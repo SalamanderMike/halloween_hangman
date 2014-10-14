@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require angular/angular
+//= require angular/angular.min
 //= require angular-route/angular-route
-//= require angular-animate/angular-animate
-//= require angular-resource/angular-resource
-//= require angular-bootstrap/ui-bootstrap-tpls
+//= require angular-animate/angular-animate.min
+//= require angular-resource/angular-resource.min
+//= require bootstrap/dist/js/bootstrap.min
+//= require angular-bootstrap/ui-bootstrap-tpls.min
 //= require_tree .
