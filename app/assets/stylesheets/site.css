@@ -7,6 +7,14 @@ html {
   background-size: cover;
 }
 
+.wrong {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(255,0,0,0.65)));
+  -webkit-background-size: cover;
+}
+
 .headding {
   position: absolute;
   width: 100%;
@@ -24,14 +32,18 @@ html {
   text-shadow: 4px 4px 10px rgba(255, 184, 0, 1);
   font-family: 'Aladin', cursive;
   color: white;
-  font-size: 4em;
+  font-size: 2em;
 }
 
 #playButton {
   position: fixed;
   top: 120px;
   left: 195px;
-  font-size: 3em;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));  height: 60px;
+  border: 0px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 3px 3px #2e150a;  border-radius: 3px;
+  font-size: 2em;
 }
 
 #letters {
@@ -42,28 +54,73 @@ html {
   width: 400px;
 }
 
-#canvas {
+#ghost {
   position: fixed;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.2);
   right: 25px;
   top: 100px;
   height: 550px;
   width: 500px;
   border-radius: 30px;
-  -webkit-box-shadow: 2px 2px 3px 4px rgba(0,42,168,.7);
-  border: 50px;
+  border: 1px solid rgba(0,0,0,.1);
   border-color: rgba(0,0,0,1);
 }
 
-rect {
-  fill: black;
+#inTheMachine {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
 }
-circle {
-  fill: black;
+
+#one {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(one.png);
+  -webkit-background-size: cover;
 }
-polyline {
-  fill: black;
+
+#two {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(two.png);
+  -webkit-background-size: cover;
 }
+
+#three {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(three.png);
+  -webkit-background-size: cover;
+}
+
+#four {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(four.png);
+  -webkit-background-size: cover;
+}
+
+#five {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(five.png);
+  -webkit-background-size: cover;
+}
+
+#six {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(six.png);
+  -webkit-background-size: cover;
+}
+
 
 #phrase {
   position: fixed;

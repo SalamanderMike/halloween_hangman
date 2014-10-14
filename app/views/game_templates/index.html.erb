@@ -1,3 +1,5 @@
+<div class="wrong">
+
 <div class="headding">
   <p>Halloween Hangman!</p>
 </div>
@@ -22,19 +24,22 @@
   </table>
 </div>
 
-<svg id="canvas">
-  <!-- <line id="torso" x1="200" y1="200" x2="200" y2="300" style="stroke:cyan;stroke-width:10"></line>
-  <line id="leftArm" x1="200" y1="220" x2="100" y2="100" style="stroke:cyan;stroke-width:10"></line>
-  <line id="rightArm" x1="200" y1="220" x2="300" y2="220" style="stroke:cyan;stroke-width:10"></line>
-  <line id="leftLeg" x1="200" y1="300" x2="100" y2="400" style="stroke:cyan;stroke-width:10"></line>
-  <line id="rightLeg" x1="200" y1="300" x2="300" y2="400" style="stroke:cyan;stroke-width:10"></line>
-  <circle cx="200" cy="150" r="50" style="stroke:cyan;stroke-width:10"></circle> -->
-</svg>
+<div id="ghost">
+  <div id="inTheMachine">
+    <div id="one"></div>
+    <div id="two"></div>
+    <div id="three" ng-show="game.three"></div>
+    <div id="four" ng-show="game.four"></div>
+    <div id="five" ng-show="game.five"></div>
+    <div id="six" ng-show="game.six"></div>
+  </div>
+</div>
 
 <div class="construction">Our construction ghosts are currently working on this site...
   <br><b>isn't <i>that</i> exciting?</b> Please come back soon!
 </div>
 
+</div>
 <!-- Holds onto HTLM to be called by Modal -->
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header">

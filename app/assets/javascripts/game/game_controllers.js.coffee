@@ -11,6 +11,12 @@ class GameCtrl
     @win = 0
     @secretPhrase = "happy"
     @resetAll()
+    @one = true
+    @two = true
+    @three = true
+    @four = true
+    @five = true
+    @six = true
 
   # Generate alphabet
   generateAlpha: =>
