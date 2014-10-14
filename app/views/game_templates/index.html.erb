@@ -1,49 +1,56 @@
-<div class="wrong">
+<div class="wrongLetter" ng-show="game.wrong"></div>
 
-<div class="headding">
+<div class="visible" id="headding" ng-show ="game.visibleGameTitle">
   <p>Halloween Hangman!</p>
 </div>
 
-<div ng-show ="true">
+<h1 class="visible" id="WinLose" ng-show ="game.visibleWin">You Got it!</h1>
+<h1 class="visible" id="WinLose" ng-show ="game.visibleLose">Ack!!! The Ghost Ate Your Brain!</h1>
+
+<div class="visible" ng-show ="game.visiblePlayButton">
     <button id="playButton" class="btn btn-warning" ng-click="game.secretWindow()">Play!</button>
 </div>
 
+<div class="visible" id="gameBoard" ng-show ="game.visibleGameBoard">
+  <div id="letters">
+    <div class="box"  ng-repeat="letter in game.alpha"
+                      ng-click="game.showLetter(letter)" ng-hide="letter.hidden">{{letter.chr}}</div>
+  </div>
 
-<div id="letters">
-  <div class="box"  ng-repeat="letter in game.alpha"
-                    ng-click="game.showLetter(letter)" ng-hide="letter.hidden">{{letter.chr}}</div>
-</div>
-
-<div id="phrase">
-  <table style="margin: 0px auto;">
-    <tr>
-      <td class="secret" ng-repeat="letter in game.secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
-        <div class="underline"></div>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div id="ghost">
-  <div id="inTheMachine">
-    <div id="one"></div>
-    <div id="two"></div>
-    <div id="three" ng-show="game.three"></div>
-    <div id="four" ng-show="game.four"></div>
-    <div id="five" ng-show="game.five"></div>
-    <div id="six" ng-show="game.six"></div>
+  <div id="phrase">
+    <table style="margin: 0px auto;">
+      <tr>
+        <td class="secret" ng-repeat="letter in game.secretDisplay track by $index" ng-show="letter.hidden">{{letter.chr}}
+          <div class="underline"></div>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
-<div class="construction">Our construction ghosts are currently working on this site...
-  <br><b>isn't <i>that</i> exciting?</b> Please come back soon!
-</div>
+  <div id="ghost">
+    <div id="inTheMachine">
+      <div id="one" ng-show="game.visibleOne"></div>
+      <div id="two" ng-show="game.visibleTwo"></div>
+      <div id="three" ng-show="game.visibleThree"></div>
+      <div id="four" ng-show="game.visibleFour"></div>
+      <div id="five" ng-show="game.visibleFive"></div>
+      <div id="six" ng-show="game.visibleSix"></div>
+    </div>
+  </div>
 
-</div>
+
+
+
+
+
+
+
+
 <!-- Holds onto HTLM to be called by Modal -->
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header">
-    <h3 class="modal-title">I am a modal!</h3>
+    <h3 class="modal-title">Enter Secret word!</h3>
   </div>
 
   <div class="modal-body">

@@ -1,7 +1,7 @@
 GameControllers = angular.module("GameControllers", ["ngResource", "ngAnimate", "ui.bootstrap"])
 
 class GameCtrl
-  constructor: (@scope, @modal, @log, @ModalControls) ->
+  constructor: (@scope, @timeout, @modal, @log, @ModalControls) ->
     console.log "HELLO!"
     @inputVisible = true
     @secretWord = ""
@@ -10,13 +10,28 @@ class GameCtrl
     @lose = 0
     @win = 0
     @secretPhrase = "happy"
-    @resetAll()
+    @wrong = false
     @one = true
     @two = true
     @three = true
     @four = true
     @five = true
     @six = true
+    # SPA View Pages
+    @visiblePlayButton = true
+    @visibleGameTitle = true
+    @visibleGameBoard = false
+    @visibleWin = false
+    @visibleLose = false
+    # Ghost Views in Pieces
+    @visibleOne = false
+    @visibleTwo = false
+    @visibleThree = false
+    @visibleFour = false
+    @visibleFive = false
+    @visibleSix = false
+
+    @resetAll()
 
   # Generate alphabet
   generateAlpha: =>
@@ -32,6 +47,9 @@ class GameCtrl
     @alpha = []
     @lose = 0
     @win = 0
+    @visiblePlayButton = true
+    @visibleGameTitle = true
+    @visibleGameBoard = false
     @generateAlpha()
 
   # Display Secret Word Blanks
@@ -47,6 +65,18 @@ class GameCtrl
       for object in @alpha
         if character == object.chr
           @secretDisplay.push(object)
+    @visiblePlayButton = false
+    @visibleGameTitle = false
+    @visibleGameBoard = true
+    @visibleWin = false
+    @visibleLose = false
+    # Remove Ghost in case of loss
+    @visibleOne = false
+    @visibleTwo = false
+    @visibleThree = false
+    @visibleFour = false
+    @visibleFive = false
+    @visibleSix = false
 
 
   # Show/Hide letters in word
@@ -57,12 +87,37 @@ class GameCtrl
       @win -= 1
       console.log @win
       if @win == 1
+        @visibleWin = true
         @resetAll()
     else
+      @wrongChoice()
       @lose += 1
+      @showGhost()
       if @lose == 6
-        console.log "ACK!!! You be hunged!"
+        @visibleLose = true
         @resetAll()
+
+  wrongChoice: =>
+    console.log "WRONG CHOICE"
+    @wrong = true
+    @timeout (=>
+      @wrong = false
+    ), 200
+
+  showGhost: =>
+    switch @lose
+      when 1
+        @visibleOne = true
+      when 2
+        @visibleTwo = true
+      when 3
+        @visibleThree = true
+      when 4
+        @visibleFour = true
+      when 5
+        @visibleFive = true
+      when 6
+        @visibleSix = true
 
 
   # MODAL
@@ -78,6 +133,7 @@ class GameCtrl
         @makeSecretWord(secretPhrase)
     , ->
       console.log "Modal dismissed"
+
 
 
 
@@ -99,7 +155,7 @@ class ModalControls
 
 
 
-GameControllers.controller("GameCtrl", ["$scope", "$modal", "$log", GameCtrl])
+GameControllers.controller("GameCtrl", ["$scope", "$timeout", "$modal", "$log", GameCtrl])
 GameControllers.controller("secretModal", ["$scope", "$modalInstance", ModalControls])
 
 
