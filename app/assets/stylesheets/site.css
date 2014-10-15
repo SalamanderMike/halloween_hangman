@@ -49,9 +49,9 @@ html {
   border-radius: 10px;
   -webkit-box-shadow: 2px 2px 3px 3px #2e150a;  border-radius: 3px;
   text-shadow: 4px 4px 10px rgba(255, 184, 0, 1);
-  font-family: 'Aladin', cursive;
+  font-family: 'Coustard', serif;
+  font-size: 2em;
   color: white;
-  font-size: 3em;
   z-index: 1;
 }
 
@@ -182,7 +182,8 @@ html {
 
 .box {
   position: relative;
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));  height: 60px;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));
+  height: 60px;
   width: 60px;
   font-family: 'Slabo 13px', serif;
   font-size: 3em;
@@ -246,9 +247,17 @@ html {
 }
 
 /* Custom dialog/modal headers */
-.modal-header { background-color: #ffbd2e; }
-.modal-footer { background-color: #c7ffd2; }
-.modal-header span, .modal-header h4 { color: #ffffff; }
+.modal-header {
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));
+  font-family: 'Coustard', serif;
+  font-size: 4em;
+}
+.modal-footer {
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ea8800), color-stop(100%,#8e4200));
+}
+.modal-header span, .modal-header h4 {
+ color: #ffffff;
+}
 
 /* Ease Display */
 .pad { padding: 25px; }

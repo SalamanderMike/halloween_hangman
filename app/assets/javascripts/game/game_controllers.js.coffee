@@ -1,22 +1,14 @@
 GameControllers = angular.module("GameControllers", ["ngResource", "ngAnimate", "ui.bootstrap"])
 
 class GameCtrl
-  constructor: (@scope, @timeout, @modal, @log, @ModalControls) ->
-    console.log "HELLO!"
+  constructor: (@scope, @timeout, @modal, @ModalControls) ->
     @inputVisible = true
     @secretWord = ""
     @secretDisplay = []
     @alpha = []
     @lose = 0
     @win = 0
-    @secretPhrase = "happy"
     @wrong = false
-    @one = true
-    @two = true
-    @three = true
-    @four = true
-    @five = true
-    @six = true
     # SPA View Pages
     @visiblePlayButton = true
     @visibleGameTitle = true
@@ -31,46 +23,49 @@ class GameCtrl
     @visibleFive = false
     @visibleSix = false
 
-    @resetAll()
-
   # Generate alphabet
   generateAlpha: =>
+    console.log "GENERATING ALPHABET"
+    @alpha = []
     for i in [0..25] by 1
       @abc = String.fromCharCode('A'.charCodeAt() + i)
       @alpha[i] = {chr: @abc, secret: false, hidden: false}
 
   # Reset Board
   resetAll: =>
+    console.log "RESET"
     @inputVisible = true
     @secretWord = ""
     @secretDisplay = []
     @alpha = []
     @lose = 0
     @win = 0
+    @wrong = false
     @visiblePlayButton = true
     @visibleGameTitle = true
     @visibleGameBoard = false
     @generateAlpha()
 
-  # Display Secret Word Blanks
+  # Process Secret Word
   makeSecretWord: =>
-    console.log "TESTING HERE"
+    console.log "START GAME"
     @resetAll()
     @inputVisible = false
     @secretWord = @secretPhrase.toUpperCase().split('')
     @win = @secretWord.length
     @secretPhrase = ""
-
     for character in @secretWord
       for object in @alpha
         if character == object.chr
           @secretDisplay.push(object)
     @visiblePlayButton = false
     @visibleGameTitle = false
-    @visibleGameBoard = true
+    @timeout (=>#To hide the redraw of the alphabet
+      @visibleGameBoard = true
+    ), 400
     @visibleWin = false
     @visibleLose = false
-    # Remove Ghost in case of loss
+    # Remove Ghost in case of lost game
     @visibleOne = false
     @visibleTwo = false
     @visibleThree = false
@@ -79,13 +74,12 @@ class GameCtrl
     @visibleSix = false
 
 
-  # Show/Hide letters in word
+  # Show/Hide letters in word and count wins/losses
       # todo: must keep spaces from drawing
   showLetter: (letter) =>
     if letter.chr in @secretWord
       letter.hidden = true
       @win -= 1
-      console.log @win
       if @win == 1
         @visibleWin = true
         @resetAll()
@@ -97,6 +91,7 @@ class GameCtrl
         @visibleLose = true
         @resetAll()
 
+  # Flash screen if you make an incorrect choice
   wrongChoice: =>
     console.log "WRONG CHOICE"
     @wrong = true
@@ -104,6 +99,7 @@ class GameCtrl
       @wrong = false
     ), 200
 
+  # Show ghost piece by piece according to missed letter count
   showGhost: =>
     switch @lose
       when 1
@@ -122,6 +118,7 @@ class GameCtrl
 
   # MODAL
   secretWindow: (size) =>
+    console.log "ENTER MODAL"
     modalInstance = @modal.open(
       templateUrl: "myModalContent.html"
       controller: "secretModal as modal"
@@ -132,7 +129,7 @@ class GameCtrl
       if @secretPhrase.length > 1
         @makeSecretWord(secretPhrase)
     , ->
-      console.log "Modal dismissed"
+      console.log "Cancelled Game"
 
 
 
@@ -151,11 +148,11 @@ class ModalControls
     @modalInstance.close @secretPhrase
 
   hitEnter: (evt) =>
-    @play()  if angular.equals(evt.keyCode, 13) and not (angular.equals(@secretPhrase, null) or angular.equals(@secretPhrase, ""))
+    @play() if angular.equals(evt.keyCode, 13) and not (angular.equals(@secretPhrase, null) or angular.equals(@secretPhrase, ""))
 
 
 
-GameControllers.controller("GameCtrl", ["$scope", "$timeout", "$modal", "$log", GameCtrl])
+GameControllers.controller("GameCtrl", ["$scope", "$timeout", "$modal", GameCtrl])
 GameControllers.controller("secretModal", ["$scope", "$modalInstance", ModalControls])
 
 
@@ -165,16 +162,6 @@ GameControllers.controller("secretModal", ["$scope", "$modalInstance", ModalCont
 #   link: (scope, element) ->
 #     $timeout ->
 #       element[0].focus()
-
-
-
-
-
-
-
-
-
-
 
 
 
