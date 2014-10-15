@@ -12073,6 +12073,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
         letter.hidden = true;
         this.win -= 1;
         if (this.win === 1) {
+          this.alpha = [];
           this.visibleWin = true;
           return this.resetAll();
         }
@@ -12081,6 +12082,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
         this.lose += 1;
         this.showGhost();
         if (this.lose === 6) {
+          this.alpha = [];
           this.visibleLose = true;
           return this.resetAll();
         }

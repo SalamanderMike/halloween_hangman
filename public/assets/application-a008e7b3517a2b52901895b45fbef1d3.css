@@ -108,7 +108,11 @@ html {
   -webkit-transition: opacity 3s;
 }
 
-
+/*STAGGER NG_REPEAT for later*************/
+.animated.ng-enter-stagger {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+}
 
 
 /*GHOST****************************************************/
