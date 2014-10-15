@@ -81,6 +81,7 @@ class GameCtrl
       letter.hidden = true
       @win -= 1
       if @win == 1
+        @alpha = []
         @visibleWin = true
         @resetAll()
     else
@@ -88,6 +89,7 @@ class GameCtrl
       @lose += 1
       @showGhost()
       if @lose == 6
+        @alpha = []
         @visibleLose = true
         @resetAll()
 
