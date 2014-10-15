@@ -24,7 +24,7 @@ class GameCtrl
     @visibleSix = false
 
   # Generate alphabet
-  generateAlpha: =>
+  generateAlpha: => #Try using @scope.$watch to get rid of redraw bug
     console.log "GENERATING ALPHABET"
     @alpha = []
     for i in [0..25] by 1
