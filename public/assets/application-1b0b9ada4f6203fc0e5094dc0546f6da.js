@@ -11968,11 +11968,10 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
   GameControllers = angular.module("GameControllers", ["ngResource", "ngAnimate", "ui.bootstrap"]);
 
   GameCtrl = (function() {
-    function GameCtrl(scope, timeout, modal, log, ModalControls) {
+    function GameCtrl(scope, timeout, modal, ModalControls) {
       this.scope = scope;
       this.timeout = timeout;
       this.modal = modal;
-      this.log = log;
       this.ModalControls = ModalControls;
       this.secretWindow = __bind(this.secretWindow, this);
       this.showGhost = __bind(this.showGhost, this);
@@ -11981,21 +11980,13 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       this.makeSecretWord = __bind(this.makeSecretWord, this);
       this.resetAll = __bind(this.resetAll, this);
       this.generateAlpha = __bind(this.generateAlpha, this);
-      console.log("HELLO!");
       this.inputVisible = true;
       this.secretWord = "";
       this.secretDisplay = [];
       this.alpha = [];
       this.lose = 0;
       this.win = 0;
-      this.secretPhrase = "happy";
       this.wrong = false;
-      this.one = true;
-      this.two = true;
-      this.three = true;
-      this.four = true;
-      this.five = true;
-      this.six = true;
       this.visiblePlayButton = true;
       this.visibleGameTitle = true;
       this.visibleGameBoard = false;
@@ -12007,11 +11998,12 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       this.visibleFour = false;
       this.visibleFive = false;
       this.visibleSix = false;
-      this.resetAll();
     }
 
     GameCtrl.prototype.generateAlpha = function() {
       var i, _i, _results;
+      console.log("GENERATING ALPHABET");
+      this.alpha = [];
       _results = [];
       for (i = _i = 0; _i <= 25; i = _i += 1) {
         this.abc = String.fromCharCode('A'.charCodeAt() + i);
@@ -12025,12 +12017,14 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
     };
 
     GameCtrl.prototype.resetAll = function() {
+      console.log("RESET");
       this.inputVisible = true;
       this.secretWord = "";
       this.secretDisplay = [];
       this.alpha = [];
       this.lose = 0;
       this.win = 0;
+      this.wrong = false;
       this.visiblePlayButton = true;
       this.visibleGameTitle = true;
       this.visibleGameBoard = false;
@@ -12039,7 +12033,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
 
     GameCtrl.prototype.makeSecretWord = function() {
       var character, object, _i, _j, _len, _len1, _ref, _ref1;
-      console.log("TESTING HERE");
+      console.log("START GAME");
       this.resetAll();
       this.inputVisible = false;
       this.secretWord = this.secretPhrase.toUpperCase().split('');
@@ -12058,7 +12052,11 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       }
       this.visiblePlayButton = false;
       this.visibleGameTitle = false;
-      this.visibleGameBoard = true;
+      this.timeout(((function(_this) {
+        return function() {
+          return _this.visibleGameBoard = true;
+        };
+      })(this)), 400);
       this.visibleWin = false;
       this.visibleLose = false;
       this.visibleOne = false;
@@ -12074,7 +12072,6 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       if (_ref = letter.chr, __indexOf.call(this.secretWord, _ref) >= 0) {
         letter.hidden = true;
         this.win -= 1;
-        console.log(this.win);
         if (this.win === 1) {
           this.visibleWin = true;
           return this.resetAll();
@@ -12119,6 +12116,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
 
     GameCtrl.prototype.secretWindow = function(size) {
       var modalInstance;
+      console.log("ENTER MODAL");
       modalInstance = this.modal.open({
         templateUrl: "myModalContent.html",
         controller: "secretModal as modal",
@@ -12132,7 +12130,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
           }
         };
       })(this), function() {
-        return console.log("Modal dismissed");
+        return console.log("Cancelled Game");
       });
     };
 
@@ -12169,7 +12167,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
 
   })();
 
-  GameControllers.controller("GameCtrl", ["$scope", "$timeout", "$modal", "$log", GameCtrl]);
+  GameControllers.controller("GameCtrl", ["$scope", "$timeout", "$modal", GameCtrl]);
 
   GameControllers.controller("secretModal", ["$scope", "$modalInstance", ModalControls]);
 
