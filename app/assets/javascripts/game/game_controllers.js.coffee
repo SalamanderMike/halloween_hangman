@@ -2,7 +2,6 @@ GameControllers = angular.module("GameControllers", ["ngResource", "ngAnimate", 
 
 class GameCtrl
   constructor: (@scope, @timeout, @modal, @ModalControls) ->
-    @inputVisible = true
     @secretWord = ""
     @secretDisplay = []
     @alpha = []
@@ -16,16 +15,17 @@ class GameCtrl
     @visibleWin = false
     @visibleLose = false
     # Ghost Views in Pieces
-    @visibleOne = false
-    @visibleTwo = false
-    @visibleThree = false
-    @visibleFour = false
-    @visibleFive = false
-    @visibleSix = false
+    @visibleOne = true
+    @visibleTwo = true
+    @visibleThree = true
+    @visibleFour = true
+    @visibleFive = true
+    @visibleSix = true
 
   # Generate alphabet
   generateAlpha: => #Try using @scope.$watch to get rid of redraw bug
     console.log "GENERATING ALPHABET"
+    @visibleGameBoard = false
     @alpha = []
     for i in [0..25] by 1
       @abc = String.fromCharCode('A'.charCodeAt() + i)
@@ -34,7 +34,7 @@ class GameCtrl
   # Reset Board
   resetAll: =>
     console.log "RESET"
-    @inputVisible = true
+    @visibleGameBoard = false
     @secretWord = ""
     @secretDisplay = []
     @alpha = []
@@ -43,14 +43,18 @@ class GameCtrl
     @wrong = false
     @visiblePlayButton = true
     @visibleGameTitle = true
-    @visibleGameBoard = false
     @generateAlpha()
+    @visibleOne = false
+    @visibleTwo = false
+    @visibleThree = false
+    @visibleFour = false
+    @visibleFive = false
+    @visibleSix = false
 
   # Process Secret Word
   makeSecretWord: =>
     console.log "START GAME"
     @resetAll()
-    @inputVisible = false
     @secretWord = @secretPhrase.toUpperCase().split('')
     @win = @secretWord.length
     @secretPhrase = ""
@@ -65,14 +69,6 @@ class GameCtrl
     ), 400
     @visibleWin = false
     @visibleLose = false
-    # Remove Ghost in case of lost game
-    @visibleOne = false
-    @visibleTwo = false
-    @visibleThree = false
-    @visibleFour = false
-    @visibleFive = false
-    @visibleSix = false
-
 
   # Show/Hide letters in word and count wins/losses
       # todo: must keep spaces from drawing
@@ -82,16 +78,16 @@ class GameCtrl
       @win -= 1
       if @win == 1
         @alpha = []
+        @showGhostAll()#Show Ghost For Effect
         @visibleWin = true
-        @resetAll()
     else
       @wrongChoice()
       @lose += 1
-      @showGhost()
+      @showGhostPieces()
       if @lose == 6
         @alpha = []
+        @showGhostAll()#Show Ghost For Effect
         @visibleLose = true
-        @resetAll()
 
   # Flash screen if you make an incorrect choice
   wrongChoice: =>
@@ -102,7 +98,7 @@ class GameCtrl
     ), 200
 
   # Show ghost piece by piece according to missed letter count
-  showGhost: =>
+  showGhostPieces: =>
     switch @lose
       when 1
         @visibleOne = true
@@ -116,6 +112,16 @@ class GameCtrl
         @visibleFive = true
       when 6
         @visibleSix = true
+
+  showGhostAll: =>
+    @visibleGameBoard = false
+    @visiblePlayButton = true
+    @visibleOne = true
+    @visibleTwo = true
+    @visibleThree = true
+    @visibleFour = true
+    @visibleFive = true
+    @visibleSix = true
 
 
   # MODAL

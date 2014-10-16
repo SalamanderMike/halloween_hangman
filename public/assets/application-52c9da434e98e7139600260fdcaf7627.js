@@ -11974,13 +11974,13 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       this.modal = modal;
       this.ModalControls = ModalControls;
       this.secretWindow = __bind(this.secretWindow, this);
-      this.showGhost = __bind(this.showGhost, this);
+      this.showGhostAll = __bind(this.showGhostAll, this);
+      this.showGhostPieces = __bind(this.showGhostPieces, this);
       this.wrongChoice = __bind(this.wrongChoice, this);
       this.showLetter = __bind(this.showLetter, this);
       this.makeSecretWord = __bind(this.makeSecretWord, this);
       this.resetAll = __bind(this.resetAll, this);
       this.generateAlpha = __bind(this.generateAlpha, this);
-      this.inputVisible = true;
       this.secretWord = "";
       this.secretDisplay = [];
       this.alpha = [];
@@ -11992,17 +11992,18 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       this.visibleGameBoard = false;
       this.visibleWin = false;
       this.visibleLose = false;
-      this.visibleOne = false;
-      this.visibleTwo = false;
-      this.visibleThree = false;
-      this.visibleFour = false;
-      this.visibleFive = false;
-      this.visibleSix = false;
+      this.visibleOne = true;
+      this.visibleTwo = true;
+      this.visibleThree = true;
+      this.visibleFour = true;
+      this.visibleFive = true;
+      this.visibleSix = true;
     }
 
     GameCtrl.prototype.generateAlpha = function() {
       var i, _i, _results;
       console.log("GENERATING ALPHABET");
+      this.visibleGameBoard = false;
       this.alpha = [];
       _results = [];
       for (i = _i = 0; _i <= 25; i = _i += 1) {
@@ -12018,7 +12019,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
 
     GameCtrl.prototype.resetAll = function() {
       console.log("RESET");
-      this.inputVisible = true;
+      this.visibleGameBoard = false;
       this.secretWord = "";
       this.secretDisplay = [];
       this.alpha = [];
@@ -12027,15 +12028,19 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       this.wrong = false;
       this.visiblePlayButton = true;
       this.visibleGameTitle = true;
-      this.visibleGameBoard = false;
-      return this.generateAlpha();
+      this.generateAlpha();
+      this.visibleOne = false;
+      this.visibleTwo = false;
+      this.visibleThree = false;
+      this.visibleFour = false;
+      this.visibleFive = false;
+      return this.visibleSix = false;
     };
 
     GameCtrl.prototype.makeSecretWord = function() {
       var character, object, _i, _j, _len, _len1, _ref, _ref1;
       console.log("START GAME");
       this.resetAll();
-      this.inputVisible = false;
       this.secretWord = this.secretPhrase.toUpperCase().split('');
       this.win = this.secretWord.length;
       this.secretPhrase = "";
@@ -12058,13 +12063,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
         };
       })(this)), 400);
       this.visibleWin = false;
-      this.visibleLose = false;
-      this.visibleOne = false;
-      this.visibleTwo = false;
-      this.visibleThree = false;
-      this.visibleFour = false;
-      this.visibleFive = false;
-      return this.visibleSix = false;
+      return this.visibleLose = false;
     };
 
     GameCtrl.prototype.showLetter = function(letter) {
@@ -12074,17 +12073,17 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
         this.win -= 1;
         if (this.win === 1) {
           this.alpha = [];
-          this.visibleWin = true;
-          return this.resetAll();
+          this.showGhostAll();
+          return this.visibleWin = true;
         }
       } else {
         this.wrongChoice();
         this.lose += 1;
-        this.showGhost();
+        this.showGhostPieces();
         if (this.lose === 6) {
           this.alpha = [];
-          this.visibleLose = true;
-          return this.resetAll();
+          this.showGhostAll();
+          return this.visibleLose = true;
         }
       }
     };
@@ -12099,7 +12098,7 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
       })(this)), 200);
     };
 
-    GameCtrl.prototype.showGhost = function() {
+    GameCtrl.prototype.showGhostPieces = function() {
       switch (this.lose) {
         case 1:
           return this.visibleOne = true;
@@ -12114,6 +12113,17 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
         case 6:
           return this.visibleSix = true;
       }
+    };
+
+    GameCtrl.prototype.showGhostAll = function() {
+      this.visibleGameBoard = false;
+      this.visiblePlayButton = true;
+      this.visibleOne = true;
+      this.visibleTwo = true;
+      this.visibleThree = true;
+      this.visibleFour = true;
+      this.visibleFive = true;
+      return this.visibleSix = true;
     };
 
     GameCtrl.prototype.secretWindow = function(size) {
